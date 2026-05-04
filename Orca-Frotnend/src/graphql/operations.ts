@@ -154,3 +154,126 @@ export const OUTLOOK_CALENDAR_EVENTS_QUERY = gql`
     }
   }
 `;
+
+export const BROKERAGE_SETTINGS_QUERY = gql`
+  query BrokerageSettings($id: ID!) {
+    brokerage(id: $id) {
+      id
+      timezone
+      business_hours_start
+      business_hours_end
+      working_days
+      initial_outreach_script_primary
+      initial_outreach_script_secondary
+      mortgage_country
+      mortgage_state
+      mortgage_city
+      mortgage_about
+      mortgage_services
+      inbound_context_lookup_enabled
+      first_call_attempt_delay_minutes
+      call_retry_attempts_max
+      call_retry_interval_minutes
+      max_call_duration_seconds
+      lead_response_timeout_seconds
+      call_missed_sms_boolean
+      sms_delay_after_missed_call
+      send_email_if_call_not_answered
+      delay_before_first_email
+      voicemail_drop_enabled
+      sms_enabled
+      sms_can_be_contacted
+      sms_attempts_max
+      sms_templates
+      send_recap_sms_after_call
+      send_reminder_sms_before_meeting
+      meeting_sms_reminder_offset
+      email_enabled
+      email_can_be_contacted
+      email_templates
+      send_recap_email_after_call
+      send_reminder_email_before_meeting
+      meeting_email_reminder_offset
+      automation_flow_steps
+    }
+  }
+`;
+
+export const UPDATE_BROKERAGE_CALL_HANDLING_MUTATION = gql`
+  mutation UpdateBrokerageCallHandling(
+    $brokerageId: Int!
+    $initialOutreachScriptPrimary: String
+    $initialOutreachScriptSecondary: String
+    $mortgageCountry: String
+    $mortgageState: String
+    $mortgageCity: String
+    $mortgageAbout: String
+    $mortgageServices: [String!]
+    $inboundContextLookupEnabled: Boolean!
+    $firstCallAttemptDelayMinutes: Int!
+    $callRetryAttemptsMax: Int!
+    $callRetryIntervalMinutes: Int!
+    $maxCallDurationSeconds: Int!
+    $leadResponseTimeoutSeconds: Int!
+    $callMissedSmsBoolean: Boolean!
+    $smsDelayAfterMissedCall: Int!
+    $sendEmailIfCallNotAnswered: Boolean!
+    $delayBeforeFirstEmail: Int!
+    $voicemailDropEnabled: Boolean!
+  ) {
+    updateBrokerageCallHandling(
+      brokerage_id: $brokerageId
+      initial_outreach_script_primary: $initialOutreachScriptPrimary
+      initial_outreach_script_secondary: $initialOutreachScriptSecondary
+      mortgage_country: $mortgageCountry
+      mortgage_state: $mortgageState
+      mortgage_city: $mortgageCity
+      mortgage_about: $mortgageAbout
+      mortgage_services: $mortgageServices
+      inbound_context_lookup_enabled: $inboundContextLookupEnabled
+      first_call_attempt_delay_minutes: $firstCallAttemptDelayMinutes
+      call_retry_attempts_max: $callRetryAttemptsMax
+      call_retry_interval_minutes: $callRetryIntervalMinutes
+      max_call_duration_seconds: $maxCallDurationSeconds
+      lead_response_timeout_seconds: $leadResponseTimeoutSeconds
+      call_missed_sms_boolean: $callMissedSmsBoolean
+      sms_delay_after_missed_call: $smsDelayAfterMissedCall
+      send_email_if_call_not_answered: $sendEmailIfCallNotAnswered
+      delay_before_first_email: $delayBeforeFirstEmail
+      voicemail_drop_enabled: $voicemailDropEnabled
+    ) {
+      id
+      initial_outreach_script_primary
+      initial_outreach_script_secondary
+      mortgage_country
+      mortgage_state
+      mortgage_city
+      mortgage_about
+      mortgage_services
+    }
+  }
+`;
+
+export const UPDATE_BROKERAGE_BUSINESS_HOURS_MUTATION = gql`
+  mutation UpdateBrokerageBusinessHours(
+    $brokerageId: Int!
+    $businessHoursStart: String!
+    $businessHoursEnd: String!
+    $workingDays: [String!]!
+    $timezone: String!
+  ) {
+    updateBrokerageBusinessHours(
+      brokerage_id: $brokerageId
+      business_hours_start: $businessHoursStart
+      business_hours_end: $businessHoursEnd
+      working_days: $workingDays
+      timezone: $timezone
+    ) {
+      id
+      business_hours_start
+      business_hours_end
+      working_days
+      timezone
+    }
+  }
+`;

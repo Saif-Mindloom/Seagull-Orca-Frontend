@@ -1,3 +1,5 @@
+import { useAuth } from "../context/AuthContext";
+
 const avatarSrc =
   "https://www.figma.com/api/mcp/asset/4de875de-d9d7-4bdf-a559-1d140605d98e";
 const refreshIconSrc =
@@ -10,7 +12,19 @@ export type TopBarProps = {
   pageLabel: string;
 };
 
+function formatRoleLabel(role?: string | null) {
+  if (!role) return "Advisor";
+  return role
+    .split("_")
+    .map((part) => part.charAt(0) + part.slice(1).toLowerCase())
+    .join(" ");
+}
+
 export function TopBar({ statusLabel, pageLabel }: TopBarProps) {
+  const { user } = useAuth();
+  const displayName = user?.name?.trim() || "Edward Leon";
+  const displayRole = formatRoleLabel(user?.role) || "Senior Advisor";
+
   return (
     <header className="topbar">
       <div className="crumbs">
@@ -31,10 +45,10 @@ export function TopBar({ statusLabel, pageLabel }: TopBarProps) {
         >
           <img src={notificationsIconSrc} alt="" />
         </button>
-        <img src={avatarSrc} alt="Edward Leon" />
+        <img src={avatarSrc} alt={displayName} />
         <div>
-          <strong>Edward Leon</strong>
-          <span>Senior Advisor</span>
+          <strong>{displayName}</strong>
+          <span>{displayRole}</span>
         </div>
       </div>
     </header>

@@ -391,7 +391,15 @@ export function LeadsPipelinePage() {
                     </td>
                     <td>
                       <div className="lp-customer">
-                        <strong>{lead.customerName}</strong>
+                        <strong>
+                          <Link
+                            className="lp-lead-link"
+                            to={`/leads/${lead.id}`}
+                            state={{ lead }}
+                          >
+                            {lead.customerName}
+                          </Link>
+                        </strong>
                         <span>{lead.customerMeta}</span>
                       </div>
                     </td>

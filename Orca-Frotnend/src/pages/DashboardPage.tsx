@@ -216,7 +216,8 @@ function parseMeetingFromCalendar(params: {
 const reportingFilter = { datePreset: "THIS_MONTH" };
 
 export function DashboardPage() {
-  const { token, user, meLoading } = useAuth();
+  const { token, user, meLoading, logout } = useAuth();
+  const displayName = user?.name?.trim() || "there";
   const envBrokerage = Number(import.meta.env.VITE_DEFAULT_BROKERAGE_ID || 0);
   const brokerageId =
     user?.brokerage_id != null && user.brokerage_id > 0
@@ -524,12 +525,17 @@ export function DashboardPage() {
 
       <section className="headline">
         <div>
-          <h1>Good Morning, Sahan</h1>
+          <h1>Good Morning, {displayName}</h1>
           <p>Here&apos;s what&apos;s happening today</p>
         </div>
-        <button type="button" className="export-btn">
-          Export Data
-        </button>
+        <div className="headline-actions">
+          <button type="button" className="dashboard-logout-btn" onClick={logout}>
+            Logout
+          </button>
+          <button type="button" className="export-btn">
+            Export Data
+          </button>
+        </div>
       </section>
 
       <section className="stats">

@@ -59,12 +59,17 @@ export function Sidebar() {
         </a>
       </nav>
       <div className="sidebar-footer">
-        <a className="nav-item" href="#">
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "nav-item active" : "nav-item"
+          }
+          to="/settings"
+        >
           <span className="nav-icon-wrap">
             <img className="nav-icon" src={settingsIconSrc} alt="" />
           </span>
           <span>Settings</span>
-        </a>
+        </NavLink>
         <a className="nav-item" href="#">
           <span className="nav-icon-wrap">
             <img className="nav-icon" src={supportIconSrc} alt="" />
